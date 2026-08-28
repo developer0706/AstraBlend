@@ -17,3 +17,4 @@ __pycache__/
 # Large/raw data - don't commit by default
 data/raw/
 data/processed/
+database/*.db

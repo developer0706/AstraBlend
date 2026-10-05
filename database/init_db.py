@@ -8,9 +8,11 @@ DATABASE_FILE = PROJECT_ROOT / "database" / "astrablend.db"
 
 def main() -> None:
     connection = sqlite3.connect(DATABASE_FILE)
-
     cursor = connection.cursor()
 
+    # --------------------------------------------------------
+    # Weather models
+    # --------------------------------------------------------
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS weather_models (
@@ -23,6 +25,9 @@ def main() -> None:
         """
     )
 
+    # --------------------------------------------------------
+    # Geographic locations
+    # --------------------------------------------------------
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS locations (
@@ -36,6 +41,9 @@ def main() -> None:
         """
     )
 
+    # --------------------------------------------------------
+    # Original model-skill table
+    # --------------------------------------------------------
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS model_skill (
@@ -56,11 +64,42 @@ def main() -> None:
         """
     )
 
+    # --------------------------------------------------------
+    # Forecast-skill table
+    #
+    # This will eventually store the historical performance
+    # of each forecast model by location, season and lead time.
+    # --------------------------------------------------------
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS forecast_skill (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            model_name TEXT NOT NULL,
+            latitude REAL NOT NULL,
+            longitude REAL NOT NULL,
+            season TEXT,
+            lead_hours INTEGER NOT NULL,
+            mae REAL,
+            rmse REAL,
+            bias REAL,
+            sample_count INTEGER,
+            UNIQUE(
+                model_name,
+                latitude,
+                longitude,
+                season,
+                lead_hours
+            )
+        )
+        """
+    )
+
     connection.commit()
     connection.close()
 
     print("===== ASTRA BLEND DATABASE =====")
-    print(f"Database created: {DATABASE_FILE}")
+    print(f"Database: {DATABASE_FILE}")
+    print("Database initialization complete.")
 
 
 if __name__ == "__main__":

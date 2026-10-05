@@ -18,3 +18,15 @@ __pycache__/
 data/raw/
 data/processed/
 database/*.db
+# Local database
+database/*.db
+
+# Large dependency/source archives
+*.tar.gz
+
+# Git metadata
+.git/
+
+# Weather datasets / generated data
+data/forecasts/
+data/live_imd/

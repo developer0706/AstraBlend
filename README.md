@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/5c696b37-d1f2-49fd-8223-10e4c8c1f2de
+
 # 🌧️ AstraBlend – AI-Powered Rainfall Forecasting
 
 **Blending Artificial Intelligence with Weather Forecasting to improve rainfall prediction over India.**
